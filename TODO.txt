@@ -4,6 +4,8 @@ Models
     - cars
     - buildings
 
+Lighting
+
 Skybox
 
 Controls
