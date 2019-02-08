@@ -22,7 +22,9 @@ const light = (function () {
     }
 
     function render() {
-
+        helpers.forEach(helper => {
+            helper.update();
+        });
     }
     return {
         setLights: setLights,

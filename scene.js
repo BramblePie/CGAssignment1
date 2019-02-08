@@ -22,6 +22,7 @@ scene.add(ambLight);
 
 light.setLights(scene);
 
+
 // ^^^^
 
 controls = new THREE.OrbitControls(camera);
