@@ -2,7 +2,7 @@ const light = (function () {
     var helpers = [];
 
     function keyLight(makeHelper) {
-        const l = new THREE.DirectionalLight(0xffffff, 0.5);
+        const l = new THREE.DirectionalLight(0xffffff, 1);
         l.position.set(1, 2, 1);
 
         if (makeHelper)
