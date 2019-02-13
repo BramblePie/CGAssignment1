@@ -18,6 +18,7 @@ ModelLoader.setModels(scene);
 
 ModelCreator.setModels(scene);
 
+Skybox.setSkybox(scene);
 
 // ^^^^
 
