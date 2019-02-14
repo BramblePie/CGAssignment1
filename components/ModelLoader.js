@@ -12,7 +12,7 @@ const ModelLoader = (function () {
 
     // public function to load and add all wanted models to world
     function setModels(scene) {
-        loadEiffel(scene)
+        //loadEiffel(scene)
     }
 
     function render(delta) {
