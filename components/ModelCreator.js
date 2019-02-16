@@ -1,18 +1,11 @@
 const ModelCreator = (function () {
 
-    // Add a simple geometry
-    function simpleCube() {
-        const geometry = new THREE.BoxGeometry(1, 1, 1);
-        const material = new THREE.MeshStandardMaterial();
-        return new THREE.Mesh(geometry, material);
-    }
-
     function groundOld() {
-        const geometry = new THREE.PlaneGeometry(20, 20, 1, 1);
+        const geometry = new THREE.PlaneGeometry(16, 20, 1, 1);
         const texture = new THREE.TextureLoader().load("resources/images/grass_normal.jpg");
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
-        texture.repeat.set(16, 16);
+        texture.repeat.set(36, 36);
         const material = new THREE.MeshStandardMaterial({
             color: 0x339922,
             side: 0,
@@ -22,6 +15,7 @@ const ModelCreator = (function () {
         });
         const mesh = new THREE.Mesh(geometry, material);
         mesh.rotateX(-Math.PI / 2);
+        mesh.position.set(-2, 0, 0);
         return mesh;
         // TODO: Ground needs hole for lake
     }
@@ -71,7 +65,6 @@ const ModelCreator = (function () {
         return tree;
     }
 
-
     function ground() {
         const geometry = new THREE.Geometry();
         geometry.vertices.push(
@@ -96,12 +89,30 @@ const ModelCreator = (function () {
         return mesh;
     }
 
+    function road() {
+        const geo = new THREE.PlaneGeometry(4, 20, 1, 1);
+        const texture = new THREE.TextureLoader().load("resources/images/road_normal.jpg");
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(2, 8);
+        const mat = new THREE.MeshStandardMaterial({
+            color: 0x505050,
+            roughness: 0.8,
+            metalness: 0.4,
+            normalMap: texture
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.rotation.x = -Math.PI / 2;
+        mesh.position.set(8, 0, 0);
+        return mesh;
+    }
+
     function setModels(scene) {
-        // scene.add(simpleCube());
         scene.add(groundOld());
         scene.add(lake());
         scene.add(three());
-        scene.add(ground());
+        // scene.add(ground());
+        scene.add(road());
     }
 
     return {

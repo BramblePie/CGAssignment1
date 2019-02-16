@@ -5,6 +5,15 @@ const ModelLoader = (function () {
 
     const objLoader = new THREE.ObjectLoader();
 
+    function loadBuilding(scene) {
+        return objLoader.load("resources/models/apartment-house.json", function (obj) {
+            obj.children[1].children = [];
+            obj.scale.set(0.018, 0.018, 0.018);
+            obj.position.set(1.6, 0, -6);
+            scene.add(obj);
+        })
+    }
+
     function loadDuck(scene) {
         return objLoader.load("resources/models/duck.json", function (obj) {
             duck = obj;
@@ -36,6 +45,7 @@ const ModelLoader = (function () {
     // public function to load and add all wanted models to world
     function setModels(scene) {
         loadDuck(scene);
+        loadBuilding(scene);
     }
 
     function render(delta) {
