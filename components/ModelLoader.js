@@ -19,12 +19,17 @@ const ModelLoader = (function () {
             obj.rotation.y = Math.PI / 12;
             obj.castShadow = true;
             obj.receiveShadow = true;
+            const normal = new THREE.TextureLoader().load("resources/images/grass_normal.jpg");
+            normal.wrapS = THREE.RepeatWrapping;
+            normal.wrapT = THREE.RepeatWrapping;
+            normal.repeat.set(6, 6);
             obj.children[1].children[0].material = new THREE.MeshStandardMaterial({
                 color: 0x552211,
                 roughness: 1,
                 metalness: 0.1,
                 side: 2,
-                clipShadows: true
+                clipShadows: true,
+                normalMap: normal
             });
             scene.add(obj);
         });
