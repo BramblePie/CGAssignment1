@@ -1,4 +1,5 @@
 const ModelCreator = (function () {
+    let time = 0;
 
     function groundOld() {
         const geometry = new THREE.PlaneGeometry(16, 20, 1, 1);
@@ -37,7 +38,7 @@ const ModelCreator = (function () {
         // TODO: Lake needs to go in hole in ground
     }
 
-    function three() {
+    function tree() {
         // Tree top
         const goeTop = new THREE.IcosahedronGeometry();
         const materialTop = new THREE.MeshStandardMaterial({
@@ -58,11 +59,18 @@ const ModelCreator = (function () {
         const meshTrunk = new THREE.Mesh(goeTrunk, materialTrunk);
         meshTrunk.position.set(0, -1, 0);
 
-        const tree = new THREE.Group();
-        tree.position.set(2, 2, 0);
-        tree.add(meshTrunk);
-        tree.add(meshTop);
-        return tree;
+        this.tree = new THREE.Group();
+        this.tree.position.set(2, 2, 0);
+        this.tree.add(meshTrunk);
+        this.tree.add(meshTop);
+        return this.tree;
+    }
+
+    function renderTree(delta) {
+        if (this.tree == null)
+            return;
+        treeTop = this.tree.children[1];
+        treeTop.scale.set(1.2 + 0.06 * Math.sin(time * 0.8), 1, 1.2 + 0.06 * Math.sin(time * 0.8 + Math.PI));
     }
 
     function ground() {
@@ -110,12 +118,19 @@ const ModelCreator = (function () {
     function setModels(scene) {
         scene.add(groundOld());
         scene.add(lake());
-        scene.add(three());
+        scene.add(tree());
         // scene.add(ground());
         scene.add(road());
     }
 
+    function render(delta) {
+        renderTree(delta);
+
+        time += delta;
+    }
+
     return {
-        setModels: setModels
+        setModels: setModels,
+        render: render
     }
 })();

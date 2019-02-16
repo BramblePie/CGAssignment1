@@ -35,6 +35,7 @@ const render = function () {
 
     LightCreator.render();
     ModelLoader.render(delta);
+    ModelCreator.render(delta);
 
     renderer.render(scene, camera);
 };

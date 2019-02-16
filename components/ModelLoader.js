@@ -1,6 +1,4 @@
 const ModelLoader = (function () {
-    let duck = {};
-
     let time = 0;
 
     const objLoader = new THREE.ObjectLoader();
@@ -16,7 +14,7 @@ const ModelLoader = (function () {
 
     function loadDuck(scene) {
         return objLoader.load("resources/models/duck.json", function (obj) {
-            duck = obj;
+            this.duck = obj;
             duck.children[0].children[0].material = new THREE.MeshStandardMaterial({
                 color: 0x895604,
                 metalness: 0,
@@ -32,6 +30,9 @@ const ModelLoader = (function () {
     }
 
     function updateDuck(delta) {
+        if (this.duck == null)
+            return;
+
         const x = Math.sin((time + delta) / 3);
         const z = Math.cos((time + delta) / 3);
         duck.position.x = x;
