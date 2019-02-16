@@ -9,14 +9,18 @@ const ModelCreator = (function () {
 
     function groundOld() {
         const geometry = new THREE.PlaneGeometry(20, 20, 1, 1);
+        const texture = new THREE.TextureLoader().load("resources/images/grass_normal.jpg");
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(16, 16);
         const material = new THREE.MeshStandardMaterial({
             color: 0x339922,
             side: 0,
             roughness: 0.9,
-            metalness: 0.2
+            metalness: 0.2,
+            normalMap: texture
         });
         const mesh = new THREE.Mesh(geometry, material);
-        mesh.position.set(0, -2, 0);
         mesh.rotateX(-Math.PI / 2);
         return mesh;
         // TODO: Ground needs hole for lake
@@ -33,7 +37,7 @@ const ModelCreator = (function () {
             opacity: 0.7
         });
         const mesh = new THREE.Mesh(geo, material);
-        mesh.position.set(0, -1.99, 0);
+        mesh.position.set(0, 0.01, 0);
         mesh.rotateX(-Math.PI / 2);
         return mesh;
         // TODO: Lake needs to go in hole in ground
@@ -48,7 +52,6 @@ const ModelCreator = (function () {
             metalness: 0.2
         });
         const meshTop = new THREE.Mesh(goeTop, materialTop);
-        meshTop.position.set(2, 0, 0);
         meshTop.scale = new THREE.Vector3(1, 1, 1);
 
         // Tree trunk
@@ -59,9 +62,10 @@ const ModelCreator = (function () {
             metalness: 0.2
         });
         const meshTrunk = new THREE.Mesh(goeTrunk, materialTrunk);
-        meshTrunk.position.set(2, -1, 0);
+        meshTrunk.position.set(0, -1, 0);
 
         const tree = new THREE.Group();
+        tree.position.set(2, 2, 0);
         tree.add(meshTrunk);
         tree.add(meshTop);
         return tree;
@@ -88,6 +92,7 @@ const ModelCreator = (function () {
             side: 1
         });
         const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(0, 2, 0);
         return mesh;
     }
 

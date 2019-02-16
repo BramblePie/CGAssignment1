@@ -14,13 +14,13 @@ const LightCreator = (function () {
 
     // Ambient light
     function ambient() {
-        return new THREE.AmbientLight(0xffffff, 0.1);
+        return new THREE.AmbientLight(0xffffff, 0.2);
     }
 
     // public function to add all lights to scene
     function setLights(scene) {
         // Add each wanted LightCreator
-        scene.add(mainLight(true));
+        scene.add(mainLight(false));
 
         scene.add(ambient());
 
