@@ -19,8 +19,7 @@ const Skybox = (function () {
         }
 
         const skyGeometry = new THREE.CubeGeometry(2000, 2000, 2000);
-        const skyMaterial = new THREE.MeshFaceMaterial(materialArray);
-        return new THREE.Mesh(skyGeometry, skyMaterial);
+        return new THREE.Mesh(skyGeometry, materialArray);
     }
 
     function setSkybox(scene) {
