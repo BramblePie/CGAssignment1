@@ -17,6 +17,7 @@ const ModelCreator = (function () {
         const mesh = new THREE.Mesh(geometry, material);
         mesh.rotateX(-Math.PI / 2);
         mesh.position.set(-2, 0, 0);
+        mesh.receiveShadow = true;
         return mesh;
         // TODO: Ground needs hole for lake
     }
@@ -48,6 +49,7 @@ const ModelCreator = (function () {
         });
         const meshTop = new THREE.Mesh(goeTop, materialTop);
         meshTop.scale = new THREE.Vector3(1, 1, 1);
+        meshTop.castShadow = true;
 
         // Tree trunk
         const goeTrunk = new THREE.CylinderGeometry(0.1, 0.2, 2, 3);
@@ -58,11 +60,13 @@ const ModelCreator = (function () {
         });
         const meshTrunk = new THREE.Mesh(goeTrunk, materialTrunk);
         meshTrunk.position.set(0, -1, 0);
+        meshTrunk.castShadow = true;
 
         this.tree = new THREE.Group();
         this.tree.position.set(2, 2, 0);
         this.tree.add(meshTrunk);
         this.tree.add(meshTop);
+        this.tree.castShadow = true;
         return this.tree;
     }
 

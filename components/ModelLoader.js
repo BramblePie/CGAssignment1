@@ -6,10 +6,28 @@ const ModelLoader = (function () {
     function loadBuilding(scene) {
         return objLoader.load("resources/models/apartment-house.json", function (obj) {
             obj.children[1].children = [];
-            obj.scale.set(0.018, 0.018, 0.018);
+            obj.scale.set(0.015, 0.015, 0.015);
             obj.position.set(1.6, 0, -6);
             scene.add(obj);
         })
+    }
+
+    function loadBench(scene) {
+        return objLoader.load("resources/models/bench.json", function (obj) {
+            obj.scale.set(0.005, 0.005, 0.005);
+            obj.position.set(1, 0, 3);
+            obj.rotation.y = Math.PI / 12;
+            obj.castShadow = true;
+            obj.receiveShadow = true;
+            obj.children[1].children[0].material = new THREE.MeshStandardMaterial({
+                color: 0x552211,
+                roughness: 1,
+                metalness: 0.1,
+                side: 2,
+                clipShadows: true
+            });
+            scene.add(obj);
+        });
     }
 
     function loadDuck(scene) {
@@ -25,6 +43,8 @@ const ModelLoader = (function () {
             });
             duck.scale.set(100, 100, 100);
             duck.position.set(0, -0.05, 0);
+            duck.castShadow = true;
+            duck.receiveShadow = true;
             scene.add(duck);
         });
     }
@@ -46,6 +66,7 @@ const ModelLoader = (function () {
     // public function to load and add all wanted models to world
     function setModels(scene) {
         loadDuck(scene);
+        loadBench(scene);
         loadBuilding(scene);
     }
 

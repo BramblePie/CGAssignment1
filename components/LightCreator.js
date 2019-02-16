@@ -3,8 +3,10 @@ const LightCreator = (function () {
 
     // Main source of LightCreator in world
     function mainLight(makeHelper) {
-        const l = new THREE.DirectionalLight(0xffffff, 1.5);
+        const l = new THREE.DirectionalLight(0xdddddd, 1.4);
         l.position.set(1, 2, 1);
+
+        l.castShadow = true;
 
         if (makeHelper)
             helpers.push(new THREE.DirectionalLightHelper(l, 1, 0xeeeeee));
@@ -14,7 +16,7 @@ const LightCreator = (function () {
 
     // Ambient light
     function ambient() {
-        return new THREE.AmbientLight(0xffffff, 0.2);
+        return new THREE.AmbientLight(0xffffff, 0.4);
     }
 
     // public function to add all lights to scene

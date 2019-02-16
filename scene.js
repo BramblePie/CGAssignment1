@@ -10,6 +10,9 @@ const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true});
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
 // Add components
 
 LightCreator.setLights(scene);
@@ -25,7 +28,7 @@ Skybox.setSkybox(scene);
 controls = new THREE.OrbitControls(camera);
 controls.autoRotate = true;
 controls.autoRotateSpeed = 2;
-controls.noKeys = true;
+controls.enableKeys = true;
 
 const clock = new THREE.Clock();
 
