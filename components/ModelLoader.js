@@ -12,6 +12,16 @@ const ModelLoader = (function () {
         })
     }
 
+    function loadCar(scene) {
+        return objLoader.load("resources/models/test-bike.json",
+            function (obj) {
+                obj.scale.set(0.600, 0.600, 0.600);
+                obj.position.set(4, 0, -4);
+                obj.rotation.y = Math.PI;
+                scene.add(obj);
+            });
+    }
+
     function loadBench(scene) {
         return objLoader.load("resources/models/bench.json", function (obj) {
             obj.scale.set(0.005, 0.005, 0.005);
@@ -73,6 +83,7 @@ const ModelLoader = (function () {
         loadDuck(scene);
         loadBench(scene);
         loadBuilding(scene);
+        loadCar(scene);
     }
 
     // Public function to render all models that have an animation
