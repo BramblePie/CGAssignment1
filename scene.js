@@ -11,18 +11,14 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 renderer.shadowMap.enabled = true;
+// Change THREE.BasicShadowMap to THREE.PCFSoftShadowMap for better shadows, at the cost of performance
 renderer.shadowMap.type = THREE.BasicShadowMap;
 
 // Add components
-
 LightCreator.setLights(scene);
-
 ModelLoader.setModels(scene);
-
 ModelCreator.setModels(scene);
-
 Skybox.setSkybox(scene);
-
 // ^^^^
 
 controls = new THREE.OrbitControls(camera);
@@ -36,6 +32,7 @@ const render = function () {
     requestAnimationFrame(render);
     const delta = clock.getDelta();
 
+    // Render any animation or change in lighting position
     LightCreator.render();
     ModelLoader.render(delta);
     ModelCreator.render(delta);

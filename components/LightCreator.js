@@ -2,10 +2,11 @@ const LightCreator = (function () {
     const helpers = [];
 
     // Main source of LightCreator in world
-    function mainLight(makeHelper) {
+    function sunLight(makeHelper) {
         const l = new THREE.DirectionalLight(0xdddddd, 1.4);
         l.position.set(1, 2, 1);
 
+        // This light will cast all shadows
         l.castShadow = true;
 
         if (makeHelper)
@@ -22,7 +23,7 @@ const LightCreator = (function () {
     // public function to add all lights to scene
     function setLights(scene) {
         // Add each wanted LightCreator
-        scene.add(mainLight(false));
+        scene.add(sunLight(false));
 
         scene.add(ambient());
 
@@ -32,7 +33,7 @@ const LightCreator = (function () {
         });
     }
 
-    // if LightCreator direction or position changes it needs to be rendered
+    // if any lights change direction or position it needs to be rendered
     function render() {
         helpers.forEach(helper => {
             helper.update();

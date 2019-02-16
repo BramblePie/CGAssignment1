@@ -75,6 +75,7 @@ const ModelLoader = (function () {
         loadBuilding(scene);
     }
 
+    // Public function to render all models that have an animation
     function render(delta) {
         updateDuck(delta);
 
