@@ -12,7 +12,7 @@ const ModelLoader = (function () {
         })
     }
 
-    function loadCar(scene) {
+    function loadBike(scene) {
         return objLoader.load("resources/models/test-bike.json",
             function (obj) {
                 obj.scale.set(0.600, 0.600, 0.600);
@@ -83,7 +83,7 @@ const ModelLoader = (function () {
         loadDuck(scene);
         loadBench(scene);
         loadBuilding(scene);
-        loadCar(scene);
+        loadBike(scene);
     }
 
     // Public function to render all models that have an animation

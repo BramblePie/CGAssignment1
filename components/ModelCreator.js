@@ -122,12 +122,77 @@ const ModelCreator = (function () {
         return mesh;
     }
 
+    function house() {
+        //A good-old fashioned box house
+        const boxGeometry = new THREE.BoxGeometry(3, 3, 3);
+        //give it a good wall texture
+        const boxTexture = new THREE.TextureLoader().load("resources/images/house_walls.jpg");
+        boxTexture.wrapS = THREE.RepeatWrapping;
+        boxTexture.wrapT = THREE.RepeatWrapping;
+        boxTexture.repeat.set(1, 1);
+        //give it a natural look
+        const boxMat = new THREE.MeshStandardMaterial({
+            color: 0xD5BA9D,
+            roughness: 0.5,
+            metalness: 0.5,
+            normalMap: boxTexture
+        });
+        const meshBox = new THREE.Mesh(boxGeometry, boxMat);
+        meshBox.position.set(0, 1, 0);
+        meshBox.castShadow = true;
+
+        //A fitting rooftop
+        const roofGeometry = new THREE.ConeGeometry(2.5, 2, 4, 1, false);
+        const roofTexture = new THREE.TextureLoader().load("resources/images/house_roof.jpg");
+        roofTexture.wrapS = THREE.RepeatWrapping;
+        roofTexture.wrapT = THREE.RepeatWrapping;
+        roofTexture.repeat.set(1, 1);
+
+        const roofMat = new THREE.MeshStandardMaterial({
+            color: 0xCACACA,
+            roughness: 0.5,
+            metalness: 0.5,
+            normalMap: roofTexture
+        });
+        const meshRoof = new THREE.Mesh(roofGeometry, roofMat);
+        meshRoof.position.set(0, 3.5, 0);
+        meshRoof.rotation.y = Math.PI / 4;
+        meshRoof.castShadow = true;
+
+        //Chimney
+        const chimneyGeometry = new THREE.BoxGeometry(0.3, 1, 0.3);
+        const chimneyTexture = new THREE.TextureLoader().load("resources/images/house_chimney.jpg");
+        chimneyTexture.wrapS = THREE.RepeatWrapping;
+        chimneyTexture.wrapT = THREE.RepeatWrapping;
+        chimneyTexture.repeat.set(1, 1);
+
+        const chimneyMat = new THREE.MeshStandardMaterial({
+            color: 0xEAEAEA,
+            roughness: 0.8,
+            metalness: 0.3,
+            normalMap: chimneyTexture
+        });
+
+        const meshChimney = new THREE.Mesh(chimneyGeometry, chimneyMat);
+        meshChimney.position.set(0, 3.5, -1);
+        meshChimney.castShadow = true;
+
+        //grouping for easy house placement
+        this.house = new THREE.Group();
+        this.house.position.set(-7, 0, -2);
+        this.house.add(meshBox);
+        this.house.add(meshRoof);
+        this.house.add(meshChimney);
+        return this.house;
+    }
+
     // Public function to add all created models to scene
     function setModels(scene) {
         scene.add(ground());
         scene.add(lake());
         scene.add(tree());
         scene.add(road());
+        scene.add(house());
     }
 
     // Public function to render all models that have an animation

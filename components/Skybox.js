@@ -1,12 +1,13 @@
 const Skybox = (function () {
 
     function skyBoxMethod() {
-        const directions = ["resources/images/skybox/posx.png",
-            "resources/images/skybox/negx.png",
+        // Put the images in an array for easy access and code simplicity
+        const directions = ["resources/images/skybox/posz.png",
+            "resources/images/skybox/negz.png",
             "resources/images/skybox/posy.png",
             "resources/images/skybox/negy.png",
-            "resources/images/skybox/posz.png",
-            "resources/images/skybox/negz.png"
+            "resources/images/skybox/posx.png",
+            "resources/images/skybox/negx.png"
         ];
         const materialArray = [];
         const textureLoader = new THREE.TextureLoader();
