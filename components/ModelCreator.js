@@ -4,17 +4,17 @@ const ModelCreator = (function () {
     // Ground/ floor of the world
     function ground() {
         // Simple plane geometry for ground
-        const geometry = new THREE.PlaneGeometry(16, 20, 1, 1);
+        const geometry = new THREE.PlaneGeometry(200, 200, 1, 1);
 
         // Grass normal map and texture to add to aesthetics
         const normal = new THREE.TextureLoader().load("resources/images/grass_normal.jpg");
         normal.wrapS = THREE.RepeatWrapping;
         normal.wrapT = THREE.RepeatWrapping;
-        normal.repeat.set(12, 12);
+        normal.repeat.set(120, 120);
         const texture = new THREE.TextureLoader().load("resources/images/grass.jpg");
         texture.wrapT = THREE.RepeatWrapping;
         texture.wrapS = THREE.RepeatWrapping;
-        texture.repeat.set(12, 12);
+        texture.repeat.set(120, 120);
 
         // Grass has high roughness so it wont be shiny, and low metalness for a softer look
         const material = new THREE.MeshStandardMaterial({
@@ -27,7 +27,6 @@ const ModelCreator = (function () {
         const mesh = new THREE.Mesh(geometry, material);
         // Rotate so front faces up
         mesh.rotateX(-Math.PI / 2);
-        mesh.position.set(-2, 0, 0);
         // All objects may cast shadows on the ground
         mesh.receiveShadow = true;
         return mesh;
@@ -105,11 +104,11 @@ const ModelCreator = (function () {
     }
 
     function road() {
-        const geo = new THREE.PlaneGeometry(4, 20, 1, 1);
+        const geo = new THREE.PlaneGeometry(4, 200, 1, 1);
         const texture = new THREE.TextureLoader().load("resources/images/road_normal.jpg");
         texture.wrapS = THREE.RepeatWrapping;
         texture.wrapT = THREE.RepeatWrapping;
-        texture.repeat.set(2, 8);
+        texture.repeat.set(3, 160);
         const mat = new THREE.MeshStandardMaterial({
             color: 0x505050,
             roughness: 0.8,
@@ -118,7 +117,7 @@ const ModelCreator = (function () {
         });
         const mesh = new THREE.Mesh(geo, mat);
         mesh.rotation.x = -Math.PI / 2;
-        mesh.position.set(8, 0, 0);
+        mesh.position.set(8, 0.01, 0);
         return mesh;
     }
 

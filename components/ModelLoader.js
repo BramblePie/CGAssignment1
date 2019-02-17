@@ -12,14 +12,40 @@ const ModelLoader = (function () {
         })
     }
 
-    function loadCar(scene) {
-        return objLoader.load("resources/models/test-bike.json",
-            function (obj) {
-                obj.scale.set(0.600, 0.600, 0.600);
-                obj.position.set(4, 0, -4);
-                obj.rotation.y = Math.PI;
-                scene.add(obj);
+    function loadBike(scene) {
+        return objLoader.load("resources/models/bike.json", function (obj) {
+            obj.scale.set(0.600, 0.600, 0.600);
+            obj.position.set(8, 0, 0);
+            obj.rotation.y = Math.PI;
+            obj.children[0].children.forEach(function (mesh) {
+                mesh.material.transparent = true;
             });
+            this.bike = obj;
+            this.bike.v = 14;
+            scene.add(obj);
+        });
+    }
+
+    function updateBike(delta) {
+        if (this.bike == null)
+            return;
+
+        bike.position.z -= delta * bike.v;
+
+        // When at end of road reset position to start
+        if (bike.position.z < -200) {
+            bike.position.z = 200;
+        }   // When nearing end of road lose opacity
+        else if (bike.position.z < -50) {
+            bike.children[0].children.forEach(function (mesh) {
+                mesh.material.opacity = (bike.position.z + 100) / 50;
+            });
+        }   // When nearing centre go opaque
+        else if (bike.position.z > 50 && bike.position.z < 100) {
+            bike.children[0].children.forEach(function (mesh) {
+                mesh.material.opacity = (bike.position.z - 100) / -50;
+            });
+        }
     }
 
     function loadBench(scene) {
@@ -83,12 +109,13 @@ const ModelLoader = (function () {
         loadDuck(scene);
         loadBench(scene);
         loadBuilding(scene);
-        loadCar(scene);
+        loadBike(scene);
     }
 
     // Public function to render all models that have an animation
     function render(delta) {
         updateDuck(delta);
+        updateBike(delta);
 
         time += delta;
     }
