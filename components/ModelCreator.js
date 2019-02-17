@@ -126,14 +126,14 @@ const ModelCreator = (function () {
         const boxGeometry = new THREE.BoxGeometry(3, 3, 3);
         //give it a good wall texture
         const boxTexture = new THREE.TextureLoader().load("resources/images/house_walls.jpg");
+        boxTexture.wrapT = THREE.MirroredRepeatWrapping;
         boxTexture.wrapS = THREE.RepeatWrapping;
-        boxTexture.wrapT = THREE.RepeatWrapping;
-        boxTexture.repeat.set(1, 1);
+        boxTexture.repeat.set(3, 3);
         //give it a natural look
         const boxMat = new THREE.MeshStandardMaterial({
-            color: 0xD5BA9D,
-            roughness: 0.5,
-            metalness: 0.5,
+            color: 0xe0ba9d,
+            roughness: 0.2,
+            metalness: 0.6,
             normalMap: boxTexture
         });
         const meshBox = new THREE.Mesh(boxGeometry, boxMat);
@@ -145,12 +145,12 @@ const ModelCreator = (function () {
         const roofTexture = new THREE.TextureLoader().load("resources/images/house_roof.jpg");
         roofTexture.wrapS = THREE.RepeatWrapping;
         roofTexture.wrapT = THREE.RepeatWrapping;
-        roofTexture.repeat.set(1, 1);
+        roofTexture.repeat.set(1, 8);
 
         const roofMat = new THREE.MeshStandardMaterial({
             color: 0xCACACA,
-            roughness: 0.5,
-            metalness: 0.5,
+            roughness: 0.3,
+            metalness: 0.7,
             normalMap: roofTexture
         });
         const meshRoof = new THREE.Mesh(roofGeometry, roofMat);
@@ -163,10 +163,10 @@ const ModelCreator = (function () {
         const chimneyTexture = new THREE.TextureLoader().load("resources/images/house_chimney.jpg");
         chimneyTexture.wrapS = THREE.RepeatWrapping;
         chimneyTexture.wrapT = THREE.RepeatWrapping;
-        chimneyTexture.repeat.set(1, 1);
+        chimneyTexture.repeat.set(2, 6);
 
         const chimneyMat = new THREE.MeshStandardMaterial({
-            color: 0xEAEAEA,
+            color: 0xdabaaa,
             roughness: 0.8,
             metalness: 0.3,
             normalMap: chimneyTexture
@@ -178,10 +178,11 @@ const ModelCreator = (function () {
 
         //grouping for easy house placement
         this.house = new THREE.Group();
-        this.house.position.set(-7, 0, -2);
+        this.house.position.set(-7, -0.01, -2);
         this.house.add(meshBox);
         this.house.add(meshRoof);
         this.house.add(meshChimney);
+        this.house.scale.set(0.7, 0.7, 0.7);
         return this.house;
     }
 

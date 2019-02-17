@@ -4,7 +4,7 @@ const LightCreator = (function () {
     // Main source of LightCreator in world
     function sunLight(makeHelper) {
         const l = new THREE.DirectionalLight(0xdddddd, 1.4);
-        l.position.set(3, 4, 2);
+        l.position.set(10, 8, -4);
 
         // This light will cast all shadows
         l.castShadow = true;
@@ -17,7 +17,7 @@ const LightCreator = (function () {
 
     // Extra source of light
     function secondLight() {
-        const light = new THREE.DirectionalLight(0xdddddd, 1.4);
+        const light = new THREE.DirectionalLight(0xdddddd, 0.8);
         light.position.set(-5, 2, -8);
 
         return light;
